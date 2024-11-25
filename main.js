@@ -100,6 +100,36 @@ function drawActivePiece()
 	}
 }
 
+function drawPiecePreview()
+{
+	let color = TETROMINOS[CURRENT_PIECE["tetromino"]]["color"];
+	let opacity = "33";
+	ctx.fillStyle = color + opacity;
+
+	let rotation = CURRENT_PIECE["rotation"];
+	let left = CURRENT_PIECE["left"];
+	let piece = TETROMINOS[CURRENT_PIECE["tetromino"]]["rotations"][rotation];
+
+	let width = getWidth2DArray(piece);
+	let height = getHeight2DArray(piece);
+
+	let top = getHeight2DArray(PLAYFIELD) - height;
+
+	for(let x=0; x < width; x+=1)
+	for(let y=0; y < height; y+=1)
+	{
+		if(piece[y][x] == 1)
+		{
+			ctx.fillRect(
+				(left + x) * CELL_WIDTH,
+				(top + y) * CELL_WIDTH,
+				CELL_WIDTH,
+				CELL_WIDTH,
+			);
+		}
+	}
+}
+
 
 const canvas = document.getElementById("playfield");
 canvas.width = CELL_WIDTH * 10;
@@ -142,5 +172,6 @@ function gameLoop()
 
 	checkCollision();
 	drawActivePiece();
+	drawPiecePreview();
 }
 setInterval(gameLoop, 1000 / FPS);
