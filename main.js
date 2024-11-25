@@ -100,7 +100,7 @@ function drawActivePiece()
 	}
 }
 
-function drawPiecePreview()
+function drawPieceShadow()
 {
 	let color = TETROMINOS[CURRENT_PIECE["tetromino"]]["color"];
 	let opacity = "33";
@@ -172,6 +172,6 @@ function gameLoop()
 
 	checkCollision();
 	drawActivePiece();
-	drawPiecePreview();
+	drawPieceShadow();
 }
 setInterval(gameLoop, 1000 / FPS);
