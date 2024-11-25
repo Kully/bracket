@@ -27,7 +27,7 @@ export const PLAYFIELD = [
 
 export const TETROMINOS = {
 	"O": {
-		"color": "#F65620",
+		"color": "#F7D23B",
 		"rotations": [
 			[
 				[1,1],
