@@ -35,7 +35,23 @@ const CURRENT_PIECE = {
 	"lockTimer": LOCK,
 }
 
-function checkCollision() {}
+function checkCollision()
+{
+	let rotation = CURRENT_PIECE["rotation"];
+	let piece = TETROMINOS[CURRENT_PIECE["tetromino"]]["rotations"][rotation];
+	let width = getWidth2DArray(piece);
+	let height = getWidth2DArray(piece);
+
+	// prevent the piece from leaving the playfield
+	if(CURRENT_PIECE["left"] < 0)
+	{
+		CURRENT_PIECE["left"] = 0
+	}
+	if(CURRENT_PIECE["left"] + width > getWidth2DArray(PLAYFIELD))
+	{
+		CURRENT_PIECE["left"] = getWidth2DArray(PLAYFIELD) - width;
+	}
+}
 
 function isPieceLocked()
 {
@@ -165,6 +181,8 @@ function gameLoop()
 	{
 		CURRENT_PIECE["left"] += 1;
 	}
+
+	checkCollision()
 
 	// copy over the captured keyboard inputs into the current frame
 	for(let key of VALID_CONTROLLER_KEYS)
