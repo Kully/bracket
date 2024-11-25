@@ -182,7 +182,7 @@ function gameLoop()
 		CURRENT_PIECE["left"] += 1;
 	}
 
-	checkCollision()
+	checkCollision();
 
 	// copy over the captured keyboard inputs into the current frame
 	for(let key of VALID_CONTROLLER_KEYS)
