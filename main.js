@@ -27,7 +27,7 @@ let CURRENT_INPUT = {};
 for (let key of VALID_CONTROLLER_KEYS)
 	CURRENT_INPUT[key] = 0;
 
-let NEXT_PIECE = "O";
+let NEXT_PIECE;
 const CURRENT_PIECE = {
 	"tetromino": "T",
 	"rotation": 0,
@@ -64,8 +64,10 @@ function isPieceLocked()
 
 function randomlySelectNextPiece()
 {
-	return "I";
+    const keys = Object.keys(TETROMINOS);
+    return keys[Math.floor(Math.random() * keys.length)];
 }
+
 
 function getValueFrom2DArray(array_2d, x, y)
 {
@@ -179,6 +181,9 @@ function drawPiecePreview(context)
 		}
 	}
 }
+
+
+NEXT_PIECE = randomlySelectNextPiece();
 
 
 /*
