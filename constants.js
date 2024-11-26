@@ -2,7 +2,7 @@
 
 export const FPS = 60;
 
-export const GRAVITY = 1;
+export const GRAVITY = 30;
 export const ARE = 48
 export const LINE_ARE = 25;
 export const DAS = 14;

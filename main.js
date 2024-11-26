@@ -32,6 +32,7 @@ const CURRENT_PIECE = {
 	"rotation": 0,
 	"left": 0,
 	"top": 0,
+	"onFloor": false,
 	"lockTimer": LOCK,
 }
 
@@ -156,6 +157,7 @@ const ctx = canvas.getContext("2d");
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
 
+let FRAME = 0;
 function gameLoop()
 {
 	clearCanvas();
@@ -186,8 +188,20 @@ function gameLoop()
 	for(let key of VALID_CONTROLLER_KEYS)
 		CURRENT_INPUT[key] = CONTROLLER[key];
 
+	// move pieces down
+	if(
+		   FRAME % GRAVITY === 0
+		&& FRAME !== 0
+		&& CURRENT_PIECE["onFloor"] === false
+	)
+	{
+		CURRENT_PIECE["top"] += 1;
+	}
+
 	checkCollision();
 	drawActivePiece();
 	drawPieceShadow();
+
+	FRAME += 1;
 }
 setInterval(gameLoop, 1000 / FPS);
