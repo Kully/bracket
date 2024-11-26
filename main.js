@@ -183,7 +183,7 @@ function drawPiecePreview(context)
 
 /*
 	Setup the main playfield canvas
- */
+*/
 const canvas = document.getElementById("playfield");
 canvas.width = CELL_WIDTH * 10;
 canvas.height = CELL_WIDTH * 20;
