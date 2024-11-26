@@ -12,15 +12,22 @@
 		padding: 0;
 	}
 	canvas {
-		background-color: #363840;
 		position: absolute;
-		top: calc(50% - 200px);
 		left: calc(50% - 100px);
+	}
+	#piece-preview {
+		top: calc(50% - 250px);
+		border-radius: 0px;
+	}
+	#playfield {
+		background-color: #363840;
+		top: calc(50% - 200px);
 		border-radius: 4px;
 	}
 </style>
 <body>
 
+<canvas id="piece-preview"></canvas>
 <canvas id="playfield"></canvas>
 
 </body>

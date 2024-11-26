@@ -27,6 +27,7 @@ let CURRENT_INPUT = {};
 for (let key of VALID_CONTROLLER_KEYS)
 	CURRENT_INPUT[key] = 0;
 
+let NEXT_PIECE = "O";
 const CURRENT_PIECE = {
 	"tetromino": "T",
 	"rotation": 0,
@@ -147,15 +148,60 @@ function drawPieceShadow()
 	}
 }
 
+function drawPiecePreview(context)
+{
+	let letter = NEXT_PIECE;
+	let color = TETROMINOS[letter]["color"];
+	let opacity = "FF";
+	context.fillStyle = color + opacity;
 
+	let rotation = 0;
+	let top = 0;
+	let piece = TETROMINOS[letter]["rotations"][rotation];
+
+	let width = getWidth2DArray(piece);
+	let height = getHeight2DArray(piece);
+
+	// center the piece in the canvas
+	let left = 0.5 * getWidth2DArray(PLAYFIELD) - 0.5 * width;
+
+	for(let x=0; x < width; x+=1)
+	for(let y=0; y < height; y+=1)
+	{
+		if(piece[y][x] == 1)
+		{
+			context.fillRect(
+				(left + x) * CELL_WIDTH,
+				(top + y) * CELL_WIDTH,
+				CELL_WIDTH,
+				CELL_WIDTH,
+			);
+		}
+	}
+}
+
+
+/*
+	Setup the main playfield canvas
+ */
 const canvas = document.getElementById("playfield");
 canvas.width = CELL_WIDTH * 10;
 canvas.height = CELL_WIDTH * 20;
 const ctx = canvas.getContext("2d");
 
+/*
+	Setup the piece preview canvas
+*/
+const piecePreviewCanvas = document.getElementById("piece-preview");
+piecePreviewCanvas.width = CELL_WIDTH * 10;
+piecePreviewCanvas.height = CELL_WIDTH * 2;
+const piecePreviewCtx = piecePreviewCanvas.getContext("2d");
+drawPiecePreview(piecePreviewCtx);
+
 
 document.addEventListener("keydown", handleKeyDown);
 document.addEventListener("keyup", handleKeyUp);
+
 
 let FRAME = 0;
 function gameLoop()
