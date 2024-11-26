@@ -183,6 +183,7 @@ function drawPiecePreview(context)
 }
 
 
+CURRENT_PIECE["tetromino"] = randomlySelectNextPiece();
 NEXT_PIECE = randomlySelectNextPiece();
 
 
